@@ -1,0 +1,7 @@
+INSERT INTO czytelnicy (imie, nazwisko, kod) VALUES ('Anna', 'Michalak', 'an05mi')
+      ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+SELECT imie, nazwisko FROM czytelnicy
+      +++++++++++++++++++++++++++++++++++++
+SELECT tytul FROM ksiazki WHERE id_autor=(SELECT id FROM autorzy WHERE nazwisko='Fredro')
+      +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+SELECT nazwisko FROM autorzy
