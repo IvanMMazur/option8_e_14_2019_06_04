@@ -2,6 +2,10 @@ INSERT INTO czytelnicy (imie, nazwisko, kod) VALUES ('Anna', 'Michalak', 'an05mi
       ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 SELECT imie, nazwisko FROM czytelnicy
       +++++++++++++++++++++++++++++++++++++
-SELECT tytul FROM ksiazki WHERE id_autor=(SELECT id FROM autorzy WHERE nazwisko='Fredro')
+SELECT k.tytul FROM ksiazki k 
+left outer JOIN autorzy a 
+ON k.id_autor=a.id WHERE a.nazwisko ="Fredro"
       +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-SELECT nazwisko FROM autorzy
+select * from autorzy left outer 
+JOIN (select COUNT(*) AS ile, id_autor from ksiazki 
+GROUP BY id_autor)v on v.id_autor = autorzy.id

@@ -19,7 +19,12 @@
     </form>
     <?php
       $conn = mysqli_connect("localhost","root","","biblioteka");
-      
+      $show = "Czytelnik: {$_POST['imie']} {$_POST['nazwisko']} zostal dodany do bazy danych!";
+        echo $show;
+      $kod = strtolower (substr($_POST['imie'],0,2).substr($_POST['year'],strlen($_POST['year'])-2,strlen($_POST['year'])).substr($_POST['nazwisko'],0,2));
+      $query = "INSERT INTO czytelnicy (imie, nazwisko, kod) VALUES ('{$_POST['imie']}', '{$_POST['nazwisko']}', '{$kod}')";
+      $result = mysqli_query($conn,$query);
+      // print_r($query);
       mysqli_close($conn);
     ?>
   </div>
@@ -38,8 +43,15 @@
     <h3>Nasi czytelnicy:</h3>
     <?php
       $conn = mysqli_connect("localhost","root","","biblioteka");
-        
-        mysqli_close($conn);
+      $query = "SELECT imie, nazwisko FROM czytelnicy";
+      $result = mysqli_query($conn,$query);
+        echo "<ul>";
+          while ($row=mysqli_fetch_array($result)) {//дивись уважно сюда просто передаем результат запроса
+            echo "<li>".$row['imie']." ";
+            echo $row['nazwisko']."</li>";
+          }
+        echo "</ul>";
+      mysqli_close($conn);
     ?>
   </div>
   <div id="stopka">
